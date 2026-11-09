@@ -20,7 +20,7 @@ class DjangxDir:
       created by whatever needs them
 
     The folder gets a `.gitignore` containing `*`, so nothing in it is committed.
-    The location is `BASE_DIR / ".djangx"`.
+    The location is `BASE_DIR / ".djangx"`, so it only exists in a project.
 
     Examples::
 
@@ -40,14 +40,14 @@ class DjangxDir:
     def path(cls, base_dir: Path | None = None) -> Path:
         """Return the `.djangx` folder inside `base_dir`.
 
-        Without `base_dir` this uses `settings.BASE_DIR` (or the working directory if
-        the project doesn't define it). Pass `base_dir` while settings are still being
-        loaded, when `django.conf.settings` can't be read yet.
+        Without `base_dir` this uses `settings.BASE_DIR` and raises `AttributeError`
+        if the settings don't define it. Pass `base_dir` while settings are still
+        being loaded, when `django.conf.settings` can't be read yet.
         """
         if base_dir is None:
             from django.conf import settings
 
-            base_dir = Path(getattr(settings, "BASE_DIR", Path.cwd()))
+            base_dir = settings.BASE_DIR
         return Path(base_dir) / cls.NAME
 
     @classmethod
