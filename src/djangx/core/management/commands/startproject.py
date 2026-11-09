@@ -43,7 +43,7 @@ class Command(StartProjectCommand, NonSystemCheckedCommand):
             call_command("startapp", "main", verbosity=Verbosity.QUIET)
         if platform == "vercel":
             with override_settings(BASE_DIR=target):
-                call_command("createdeploy", verbosity=Verbosity.QUIET)
+                call_command("createfile", "deploy", verbosity=Verbosity.QUIET)
         cprint(
             [
                 ("✓ Created project ", Style.SUCCESS),
