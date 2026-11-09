@@ -43,7 +43,7 @@ SECRET_KEY: str = (
 
 ALLOWED_HOSTS: list[str] = [
     host.strip()
-    for host in getenv("ALLOWED_HOSTS", "localhost,127.0.0.1,.vercel.app").split(",")
+    for host in getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
     if host.strip()
 ]
 

@@ -1,7 +1,6 @@
 # ramani: src/djangx/core/management/commands/startproject.py
 """``djx startproject``: create a djangX project layout."""
 
-from argparse import ArgumentParser
 from pathlib import Path
 from typing import Any
 
@@ -25,7 +24,6 @@ class Command(StartProjectCommand, NonSystemCheckedCommand):
     )
 
     def handle(self, **options: Any) -> None:
-        platform = options.pop("platform")
         target = (
             Path(options["directory"]).expanduser().resolve()
             if options["directory"]
@@ -36,14 +34,10 @@ class Command(StartProjectCommand, NonSystemCheckedCommand):
                 CoreConfig.resources / "templates" / "startproject"
             )
         options["extensions"] = [*options["extensions"], "md", "toml"]
-        options["vercel"] = platform == "vercel"
         options["djangx_version"] = Version.get("djangx").output
         super().handle(**options)
         with override_settings(APP_DIR=target / "app"):
             call_command("startapp", "main", verbosity=Verbosity.QUIET)
-        if platform == "vercel":
-            with override_settings(BASE_DIR=target):
-                call_command("createfile", "deploy", verbosity=Verbosity.QUIET)
         cprint(
             [
                 ("✓ Created project ", Style.SUCCESS),
@@ -52,12 +46,4 @@ class Command(StartProjectCommand, NonSystemCheckedCommand):
                 (str(target), Style.HIGHLIGHT),
             ],
             verbosity=Verbosity(options["verbosity"]),
-        )
-
-    def add_arguments(self, parser: ArgumentParser) -> None:
-        super().add_arguments(parser)
-        parser.add_argument(
-            "--platform",
-            choices=("vercel",),
-            help="Deployment platform (default: none).",
         )
