@@ -19,9 +19,9 @@ jobs:
 
       - name: Generate manage.py, asgi.py and wsgi.py, and point settings at them
         run: |
-          uv run djx createmanage --overwrite
-          uv run djx createasgi --overwrite --set
-          uv run djx createwsgi --overwrite --set
+          uv run djx createfile manage --overwrite
+          uv run djx createfile asgi --overwrite --set
+          uv run djx createfile wsgi --overwrite --set
 
       - name: Push to the deploy branch
         run: |
