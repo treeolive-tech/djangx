@@ -13,6 +13,7 @@ from .djangx_dir import DjangxDir
 __all__: list[str] = [
     "Conf",
     "SettingsNotFound",
+    "in_project",
     "project_app_configs",
     "settings_module",
 ]
@@ -20,6 +21,21 @@ __all__: list[str] = [
 
 class SettingsNotFound(Exception):
     """Raised when `app/settings.py` is missing from the working directory."""
+
+
+def in_project(*, loaded: bool) -> bool:
+    """Return whether this is a project: `loaded` checks the loaded settings (`BASE_DIR` and `APP_DIR`), else the working directory.
+
+    Examples::
+
+        in_project(loaded=True)  # True under `djx runserver`, False under `djx -h`
+        in_project(loaded=False)  # True if `app/settings.py` exists in the working directory
+    """
+    if loaded:
+        from django.conf import settings
+
+        return all(hasattr(settings, name) for name in ("BASE_DIR", "APP_DIR"))
+    return (Path.cwd() / "app" / "settings.py").is_file()
 
 
 @cache
@@ -31,7 +47,7 @@ def settings_module() -> str:
         settings_module()  # "app.settings" (checks the disk once, then is cached)
         settings_module()  # SettingsNotFound: No app/settings.py found in /home/kevin
     """
-    if not (Path.cwd() / "app" / "settings.py").is_file():
+    if not in_project(loaded=False):
         raise SettingsNotFound(f"No app/settings.py found in {Path.cwd()}")
     return "app.settings"
 

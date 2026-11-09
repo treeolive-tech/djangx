@@ -14,8 +14,11 @@ class CoreConfig(AppConfig):
 
     def ready(self) -> None:
         from . import checks  # noqa: F401
+        from .utils.conf import in_project
         from .utils.djangx_dir import DjangxDir
 
+        if not in_project(loaded=True):
+            return
         try:
             DjangxDir.ensure()
         except OSError:

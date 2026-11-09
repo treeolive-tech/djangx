@@ -6,14 +6,14 @@ build-backend = "uv_build"
 [project]
 name = "djangX"
 version = "0.1.0a3"
-description = ""
+description = "Write the app, djangX wires the rest: auto-discovered apps and URLs, built-in Sass and Bootstrap, CSP on by default and ready-made deploys."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Kevin Wakhisi", email = "kevin@treeolive.tech" }]
 maintainers = [{ name = "Kevin Wakhisi", email = "kevin@treeolive.tech" }]
 requires-python = ">=3.14"
-keywords = ["djangx", "django", "bootstrap", "sass"]
+keywords = ["djangx", "django", "framework", "web-framework","bootstrap", "sass", "scss", "cli", "uv", "scaffolding", "pypi", "treeolive"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
