@@ -5,14 +5,12 @@ import hashlib
 import json
 import re
 from collections.abc import Iterable
-from string import ascii_letters, digits
 from typing import Any
 
 __all__: list[str] = [
     "fingerprint",
     "max_length_from_choices",
     "normalize_url_path",
-    "random_string",
 ]
 
 
@@ -25,19 +23,6 @@ def fingerprint(data: Any) -> str:
     """
     payload = json.dumps(data, sort_keys=True, default=str).encode()
     return hashlib.sha256(payload).hexdigest()
-
-
-def random_string(length: int = 16) -> str:
-    """Return a cryptographically secure random string of letters and digits.
-
-    Examples::
-
-        random_string()  # "aB3dEf7gHi9jKl2m"
-        random_string(32)  # a 32-character string
-    """
-    from django.utils.crypto import get_random_string
-
-    return get_random_string(length=length, allowed_chars=ascii_letters + digits)
 
 
 def max_length_from_choices(choices: Iterable[tuple[str, Any]]) -> int:

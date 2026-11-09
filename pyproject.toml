@@ -5,7 +5,7 @@ build-backend = "uv_build"
 
 [project]
 name = "djangX"
-version = "0.1.0a1"
+version = "0.1.0a2"
 description = ""
 readme = "README.md"
 license = "MIT"
@@ -33,7 +33,6 @@ dependencies = [
     "django-http-compression[brotli]>=1.4.0",
     "djangorestframework>=3.18.3",
     "pillow>=13.0.0",
-    "pyperclip>=1.11.0",
     "python-dotenv>=1.2.4",
 ]
 
@@ -46,38 +45,18 @@ djangx = "djangx.core.management.cli:main"
 djx = "djangx.core.management.cli:main"
 
 [project.urls]
-Repository = "https://github.com/treeolive-tech/djangX.git"
+Repository = "https://github.com/treeolive-tech/djangx.git"
 
 [dependency-groups]
 dev = [
     "django-stubs>=6.1.2",
-    "djlint>=1.49.9",
-    "poethepoet>=0.49.0",
-    "ramani>=0.1.0a5",
+    "djlint>=1.49.10",
+    "pre-commit>=4.7.0",
+    "ramani>=0.1.0",
 ]
 
 [tool.uv]
 preview-features = ["format-command", "check-command"]
-
-[tool.poe.tasks.format]
-sequence = [
-    { cmd = "uv run ramani" },
-    { cmd = "uv format" },
-    { cmd = "djlint . --reformat" },
-]
-
-[tool.poe.tasks.lint]
-sequence = [
-    { cmd = "uv lock --check" },
-    { cmd = "uv run ramani --check" },
-    { cmd = "uv format --check" },
-    { cmd = "uv check" },
-    { cmd = "djlint . --check" },
-    { cmd = "djlint . --lint" },
-]
-
-[tool.poe.tasks.add]
-sequence = [{ ref = "lint" }, { cmd = "git add ." }]
 
 [tool.ruff]
 exclude = ["*/migrations/*"]
