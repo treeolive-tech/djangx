@@ -13,7 +13,7 @@ def _run_builtin(*, scripts_only: bool = False) -> None:
 
     Examples::
 
-        _run_builtin()  # every djangX command
+        _run_builtin()  # every built-in command
         _run_builtin(scripts_only=True)  # hides project-specific commands outside a project
     """
     console.configure()

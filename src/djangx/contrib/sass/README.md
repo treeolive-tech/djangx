@@ -3,7 +3,7 @@
 
 # 🎨 `djangx.contrib.sass`
 
-**Dart Sass + Bootstrap for djangX. Zero config, instant rebuilds.**
+**Dart Sass + Bootstrap for DjangX. Zero config, instant rebuilds.**
 
 `SCSS in` → `CSS out` → `served by Django staticfiles`
 
@@ -30,7 +30,7 @@
 - [x] Writes CSS **beside the source** (`site.scss` → `site.css`)
 - [x] Skips partials (`_name.scss`) as standalone outputs, but still allows them in imports
 - [x] Builds incrementally with Dart Sass `--update` when settings are unchanged
-- [x] Forces a full rebuild when `SASS_DART_OPTIONS`, the Sass executable, the Sass version or the djangX version changes
+- [x] Forces a full rebuild when `SASS_DART_OPTIONS`, the Sass executable, the Sass version or the DjangX version changes
 - [x] Keeps generated CSS out of git with a managed block in each Sass folder's `.gitignore` (opt-out)
 
 ### 🔥 Development experience
@@ -92,9 +92,9 @@ djx runserver        # builds, serves, watches
 
 - Python **3.14+** and Django **6.1+**
 - **Dart Sass**, installed any way you like, so that the `sass` command is available ([install options](https://sass-lang.com/install))
-- `django-browser-reload` (installed with djangX) for live reload in development
+- `django-browser-reload` (installed with DjangX) for live reload in development
 
-djangX never installs Sass for you. It uses the `sass` command on your `PATH`, or the executable named by `SASS_EXECUTABLE`. Existing projects need one settings change: add the `STATICFILES_DIRS` line from the quick start.
+DjangX never installs Sass for you. It uses the `sass` command on your `PATH`, or the executable named by `SASS_EXECUTABLE`. Existing projects need one settings change: add the `STATICFILES_DIRS` line from the quick start.
 
 ---
 
@@ -119,7 +119,7 @@ flowchart LR
 
 Example: `app/blog/static/blog/css/site.scss` → `app/blog/static/blog/css/site.css` → `static/blog/css/site.css`.
 
-> **Discovery rules:** only installed Django apps whose names start with `app.` are scanned, recursively under their `static/` folder. djangX auto-installs every folder in `app/` that contains an `apps.py` (as `app.<folder>`), so a folder **without `apps.py` is not an app and its Sass is ignored**. `STATICFILES_DIRS` is **not** scanned for Sass.
+> **Discovery rules:** only installed Django apps whose names start with `app.` are scanned, recursively under their `static/` folder. DjangX auto-installs every folder in `app/` that contains an `apps.py` (as `app.<folder>`), so a folder **without `apps.py` is not an app and its Sass is ignored**. `STATICFILES_DIRS` is **not** scanned for Sass.
 
 Both outputs live in ordinary static folders: Bootstrap's in `.djangx/static` (listed in `STATICFILES_DIRS`) and yours beside their sources. Django's standard finders serve and collect them, so no custom finder is needed.
 
@@ -170,7 +170,7 @@ Resolution order: `--sass-executable PATH` / `SASS_EXECUTABLE` → the `sass` co
 
 ### `SASS_GITIGNORE`
 
-Compiled CSS sits beside its source, so each Sass static folder gets a `.gitignore` with a block djangX manages:
+Compiled CSS sits beside its source, so each Sass static folder gets a `.gitignore` with a block DjangX manages:
 
 ```gitignore
 # my own rules stay untouched
@@ -212,7 +212,7 @@ Compiled CSS sits beside its source, so each Sass static folder gets a `.gitigno
 | `BOOTSTRAP_INCLUDES`                      |    ✅     |                 –                 |
 | `SASS_DART_OPTIONS`                       |    ✅     |              ✅ full              |
 | `SASS_EXECUTABLE` / `--sass-executable`   |    ✅     |              ✅ full              |
-| djangX version                            |    ✅     |              ✅ full              |
+| `djangx` version                          |    ✅     |              ✅ full              |
 | Installed Sass version (`sass --version`) |    ✅     |              ✅ full              |
 | Bootstrap `compiled.css` missing          |    ✅     |                 –                 |
 
@@ -225,7 +225,7 @@ Fingerprints are stored as stamp files in `.djangx/sass/` (`bootstrap.hash` and 
 1. **`runserver`** runs `sass --build --if-changed` first, compiling every discovered app Sass folder.
 2. **Template tags** (`sass_url` / `sass_css`) do a one-time freshness check per CSS path. If the CSS is missing or older than its source, they trigger an incremental build. They then **register that folder with the watcher**.
 3. **`SassWatcher`** (one daemon thread) polls registered folders every 0.5 s, using a single directory walk per folder. Any change, partials included, triggers `sass --build --if-changed`.
-4. **Browser reload** (djangX adds `django-browser-reload` to your apps and middleware automatically when `DEBUG=True`): `.scss` / `.sass` events are swallowed so the page doesn't reload before compilation finishes. The generated CSS change is forwarded normally.
+4. **Browser reload** (DjangX adds `django-browser-reload` to your apps and middleware automatically when `DEBUG=True`): `.scss` / `.sass` events are swallowed so the page doesn't reload before compilation finishes. The generated CSS change is forwarded normally.
 
 If a build fails, the error is printed as `Sass compile failed: ...`. The watcher retries after your **next edit**, not on every poll.
 
@@ -252,14 +252,14 @@ Always refer to the **`.css`** path relative to the app's `static/` folder.
 
 ## 🗂️ The `.djangx` folder
 
-djangX keeps generated, never-committed files in `BASE_DIR/.djangx`. It is created automatically, together with `static/` and a `.gitignore` containing `*`. If that `.gitignore` already exists, djangX leaves it alone.
+DjangX keeps generated, never-committed files in `BASE_DIR/.djangx`. It is created automatically, together with `static/` and a `.gitignore` containing `*`. If that `.gitignore` already exists, DjangX leaves it alone.
 
 | Path              | Contents                                                                                                             |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `.djangx/static/` | Generated static files, such as `vendor/bootstrap/css/compiled.css`. Served and collected through `STATICFILES_DIRS` |
 | `.djangx/sass/`   | Build fingerprints (`bootstrap.hash`, `project.hash`)                                                                |
 
-The folder is general-purpose: other djangX features can use their own subfolders, and the Sass app only uses the two above.
+The folder is general-purpose: other DjangX features can use their own subfolders, and the Sass app only uses the two above.
 
 ---
 

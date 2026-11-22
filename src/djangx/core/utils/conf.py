@@ -1,5 +1,5 @@
 # ramani: src/djangx/core/utils/conf.py
-"""Project settings: finds the project's settings module and builds djangX's settings entries."""
+"""Project settings: finds the project's settings module and builds DjangX's settings entries."""
 
 from collections.abc import Sequence
 from functools import cache
@@ -74,12 +74,12 @@ class Conf:
 
     @classmethod
     def debug_app_enabled(cls, app_name: str, *, debug: bool) -> bool:
-        """Return whether djangX enables an optional app in debug mode."""
+        """Return whether an optional app is enabled in debug mode."""
         return debug and app_name in cls._DEBUG_APPS
 
     @classmethod
     def _framework_apps(cls, *, debug: bool = False) -> list[str]:
-        """Return djangX's framework apps, including reload support in debug mode."""
+        """Return included framework apps, including reload support in debug mode."""
         return [
             *(
                 [cls._RELOAD_APP]
@@ -122,9 +122,9 @@ class Conf:
     def installed_apps(
         cls, defaults: list[str], *, app_dir: Path, debug: bool = False
     ) -> list[str]:
-        """Return auto-discovered `app.*` apps, then `defaults`, then djangX's apps.
+        """Return auto-discovered `app.*` apps, then `defaults`, then DjangX's apps.
 
-        `djangx.core` comes first among djangX's apps and before the reload app.
+        `djangx.core` comes first among DjangX's apps and before the reload app.
 
         Examples::
 
@@ -146,7 +146,7 @@ class Conf:
         *,
         base_dir: Path,
     ) -> list[str | Path | tuple[str, str | Path]]:
-        """Return `dirs` followed by djangX's generated static folder, `.djangx/static`.
+        """Return `dirs` followed by DjangX's generated static folder, `.djangx/static`.
 
         Your folders come first, so a file there wins over one of the same name in
         `.djangx/static`. That folder holds generated files such as the compiled
@@ -166,7 +166,7 @@ class Conf:
 
     @classmethod
     def middleware(cls, middlewares: list[str], *, debug: bool = False) -> list[str]:
-        """Return `middlewares` with djangX's HTML middleware appended in order.
+        """Return `middlewares` in correct order.
 
         Examples::
 

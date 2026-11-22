@@ -1,19 +1,32 @@
 # ramani: pyproject.toml
 [build-system]
-requires = ["uv_build>=0.13.7,<0.14.0"]
+requires = ["uv_build>=0.13.10,<0.14.0"]
 build-backend = "uv_build"
 
 [project]
-name = "djangX"
-version = "0.1.0a3"
-description = "Write the app, djangX wires the rest: auto-discovered apps and URLs, built-in Sass and Bootstrap, CSP on by default and ready-made deploys."
+name = "djangx"
+version = "0.1.0a4"
+description = "Write the app, DjangX wires the rest: auto-discovered apps and URLs, built-in Sass and Bootstrap, CSP on by default and ready-made deploys."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Kevin Wakhisi", email = "kevin@treeolive.tech" }]
 maintainers = [{ name = "Kevin Wakhisi", email = "kevin@treeolive.tech" }]
 requires-python = ">=3.14"
-keywords = ["djangx", "django", "framework", "web-framework","bootstrap", "sass", "scss", "cli", "uv", "scaffolding", "pypi", "treeolive"]
+keywords = [
+    "djangx",
+    "django",
+    "framework",
+    "web-framework",
+    "bootstrap",
+    "sass",
+    "scss",
+    "cli",
+    "uv",
+    "scaffolding",
+    "pypi",
+    "treeolive",
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -30,15 +43,15 @@ classifiers = [
 dependencies = [
     "django>=6.1.3",
     "django-browser-reload>=1.21.0",
-    "django-http-compression[brotli]>=1.4.0",
+    "django-http-compression[brotli]>=1.5.0",
     "djangorestframework>=3.18.3",
     "pillow>=13.0.0",
     "python-dotenv>=1.2.4",
 ]
 
 [project.optional-dependencies]
-postgres = ["psycopg[binary,pool]>=3.3.8"]
-vercel = ["vercel>=0.12.2"]
+postgres = ["psycopg[binary,pool]>=3.3.9"]
+vercel = ["vercel>=0.13.3"]
 
 [project.scripts]
 djangx = "djangx.core.management.cli:main"
@@ -50,9 +63,9 @@ Repository = "https://github.com/treeolive-tech/djangx.git"
 [dependency-groups]
 dev = [
     "django-stubs>=6.1.2",
-    "djlint>=1.49.10",
+    "djlint>=1.54.2",
     "pre-commit>=4.7.0",
-    "ramani>=0.1.0",
+    "ramani>=0.1.1",
 ]
 
 [tool.uv]

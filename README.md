@@ -1,5 +1,5 @@
 <!-- ramani: README.md -->
-<h1 align="center">djangX</h1>
+<h1 align="center">DjangX</h1>
 
 <p align="center">
   <strong>Django, with the boilerplate already decided.</strong><br>
@@ -25,7 +25,7 @@
   <a href="#deploying">Deploying</a>
 </p>
 
-> **djangX** is a small framework layer on top of Django. It keeps Django's models, views, admin and ORM exactly as they are, and removes the parts of a new project that are the same every time: listing apps, wiring URLs, serving CSS, choosing a database, setting a content security policy and building for deployment. You write `app/blog/`; djangX does the rest.
+> **DjangX** is a small framework layer on top of Django. It keeps Django's models, views, admin and ORM exactly as they are, and removes the parts of a new project that are the same every time: listing apps, wiring URLs, serving CSS, choosing a database, setting a content security policy and building for deployment. You write `app/blog/`; DjangX does the rest.
 
 ```console
 $ djx startproject mysite && cd mysite
@@ -35,7 +35,7 @@ $ djx runserver
 
 ## Why
 
-Every Django project starts with the same afternoon: add the app to `INSTALLED_APPS`, add its URLs to the root `urls.py`, wire up static files, bolt on a CSS build, swap SQLite for Postgres in production, remember the middleware order. djangX makes those decisions once, in code you can read, and lets you override any of them in `settings.py`.
+Every Django project starts with the same afternoon: add the app to `INSTALLED_APPS`, add its URLs to the root `urls.py`, wire up static files, bolt on a CSS build, swap SQLite for Postgres in production, remember the middleware order. DjangX makes those decisions once, in code you can read, and lets you override any of them in `settings.py`.
 
 ## Quick start
 
@@ -123,7 +123,7 @@ Use `djx` anywhere. Commands that need a project (those that touch `app/settings
 | `djx collectstatic`                         | Build Sass, then collect. Sass sources are left out and no confirmation is asked  |
 | `djx sass --build`                          | Compile Bootstrap and your Sass by hand (`--if-changed` skips what is up to date) |
 | `djx createfile manage\|asgi\|wsgi\|deploy` | Write (or `--remove`) one of the files a deployment needs                         |
-| `djx version`                               | Print the installed djangX version                                                |
+| `djx version`                               | Print the installed DjangX version                                                |
 
 Everything else Django ships (`migrate`, `makemigrations`, `createsuperuser`, `shell`, `test`) works as usual through `djx`.
 
@@ -132,7 +132,7 @@ Everything else Django ships (`migrate`, `makemigrations`, `createsuperuser`, `s
 ```bash
 djx createfile manage                 # manage.py in the project root
 djx createfile asgi --set             # app/asgi.py, and ASGI_APPLICATION now points at it
-djx createfile wsgi --remove --reset  # delete it, point back at djangX's built-in one
+djx createfile wsgi --remove --reset  # delete it, point back at DjangX's built-in one
 djx createfile deploy --overwrite     # .github/workflows/deploy.yml
 ```
 
@@ -140,7 +140,7 @@ An existing file is never replaced unless you pass `--overwrite`. `--set` and `-
 
 ## Settings
 
-`djx startproject` generates `app/settings.py` with sensible values. The djangX-specific pieces are a few helper calls and some optional settings.
+`djx startproject` generates `app/settings.py` with sensible values. The DjangX-specific pieces are a few helper calls and some optional settings.
 
 ```python
 from djangx.core.utils.conf import Conf
@@ -216,12 +216,12 @@ Want a server to run it on? [`msingi`](https://github.com/treeolive-tech/msingi)
 ## Requirements
 
 - Python **3.14+** and Django **6.1+**
-- **Dart Sass** on your `PATH` (djangX never installs it for you)
-- Installed with djangX: `django-browser-reload`, `django-http-compression[brotli]`, `djangorestframework`, `pillow` and `python-dotenv`
+- **Dart Sass** on your `PATH` (DjangX never installs it for you)
+- Installed with DjangX: `django-browser-reload`, `django-http-compression[brotli]`, `djangorestframework`, `pillow` and `python-dotenv`
 
 ## Status
 
-djangX is **alpha**. The shape of a project is settling, but settings and helpers may still change between releases. Pin a version in `pyproject.toml`, and read the release notes before upgrading.
+DjangX is **alpha**. The shape of a project is settling, but settings and helpers may still change between releases. Pin a version in `pyproject.toml`, and read the release notes before upgrading.
 
 ## Development
 

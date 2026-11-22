@@ -1,5 +1,5 @@
 # ramani: src/djangx/core/utils/djangx_dir.py
-"""djangX's per-project working folder, `.djangx`."""
+"""DjangX's per-project working folder, `.djangx`."""
 
 from pathlib import Path
 from typing import ClassVar, final
@@ -11,7 +11,7 @@ __all__: list[str] = ["DjangxDir"]
 class DjangxDir:
     """The `.djangx` folder in a project: generated files that must not be committed.
 
-    Parts of djangX that need somewhere to put generated files use subfolders of it:
+    Parts of DjangX that need somewhere to put generated files use subfolders of it:
 
     - `static/`: generated static files, served and collected through
       `STATICFILES_DIRS` (see `Conf.staticfiles_dirs`). Always created, so

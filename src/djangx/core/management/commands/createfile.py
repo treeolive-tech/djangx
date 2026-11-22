@@ -115,7 +115,7 @@ class Command(BaseCommand):
         group.add_argument(
             "--reset",
             action="store_true",
-            help="Point it back at djangX's built-in file (needs --remove).",
+            help="Point it back at DjangX's built-in file (needs --remove).",
         )
 
     def handle(self, *args: Any, **options: Any) -> None:

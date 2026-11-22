@@ -8,9 +8,9 @@ dependencies = ["djangx>={{ djangx_version }}"]
 [dependency-groups]
 dev = [
     "django-stubs>=6.1.2",
-    "djlint>=1.49.10",
+    "djlint>=1.54.2",
     "pre-commit>=4.7.0",
-    "ramani>=0.1.0",
+    "ramani>=0.1.1",
 ]
 
 [tool.uv]

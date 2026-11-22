@@ -243,7 +243,7 @@ class SassGitignore:
     Compiled CSS is written beside its Sass source, so each Sass static folder gets a
     `.gitignore` listing exactly the files Sass generates there (`site.css` and
     `site.css.map` for `site.scss`). Hand-written CSS is never listed. Everything
-    between the start and end markers belongs to djangX and is rewritten on every
+    between the start and end markers belongs to this package and is rewritten on every
     build; any other line in the file is left alone.
     """
 

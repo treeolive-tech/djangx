@@ -1,5 +1,5 @@
 # ramani: src/djangx/core/checks.py
-"""System checks for djangX configuration."""
+"""System checks."""
 
 from typing import Any
 

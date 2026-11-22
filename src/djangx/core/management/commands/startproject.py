@@ -1,5 +1,5 @@
 # ramani: src/djangx/core/management/commands/startproject.py
-"""``djx startproject``: create a djangX project layout."""
+"""``djx startproject``: create a DjangX project layout."""
 
 from pathlib import Path
 from typing import Any
@@ -15,7 +15,7 @@ from ...utils.version import Version
 
 
 class Command(StartProjectCommand, NonSystemCheckedCommand):
-    help = "Create a djangX project with settings in app/."
+    help = "Create a DjangX project with settings in app/."
     rewrite_template_suffixes = (
         *StartProjectCommand.rewrite_template_suffixes,
         (".gitignore-tpl", ".gitignore"),
